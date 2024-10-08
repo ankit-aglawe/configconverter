@@ -10,7 +10,7 @@ _A versatile tool to convert configuration files between different formats._
 
 ConfigConverter is a powerful and easy-to-use tool for converting configuration files between various formats, including JSON, YAML, TOML, INI, and XML.
 
-- **GitHub Repository**: [github.com/ankitaglawe/configconverter](https://github.com/ankitaglawe/configconverter)
+- **GitHub Repository**: [github.com/ankit-aglawe/configconverter](https://github.com/ankit-aglawe/configconverter)
 - **PyPI Package**: [pypi.org/project/configconverter](https://pypi.org/project/configconverter)
 
 ## Features
