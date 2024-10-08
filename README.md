@@ -2,10 +2,10 @@
 
 [![PyPI Version](https://img.shields.io/pypi/v/configconverter.svg)](https://pypi.org/project/configconverter/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/configconverter.svg)](https://pypi.org/project/configconverter/)
-[![License](https://img.shields.io/pypi/l/configconverter.svg)](https://github.com/ankitaglawe/configconverter/blob/main/LICENSE)
+[![License](https://img.shields.io/pypi/l/configconverter.svg)](https://github.com/ankit-aglawe/configconverter/blob/main/LICENSE)
 [![Documentation](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://ankit-aglawe.github.io/configconverter/)
 
-**ConfigConverter** is a powerful and easy-to-use tool designed to convert configuration files between various formats, including JSON, YAML, TOML, INI, and XML. Whether you're a developer, system administrator, or DevOps engineer, ConfigConverter streamlines your workflow by simplifying the process of managing and converting configuration files.
+**ConfigConverter** is a powerful and easy-to-use tool designed to convert configuration files between various formats, including JSON, YAML, TOML, INI, and XML. 
 
 ## Features
 
@@ -30,7 +30,7 @@ pip install configconverter
 Clone the repository and install using Poetry:
 
 ```bash
-git clone https://github.com/ankitaglawe/configconverter.git
+git clone https://github.com/ankit-aglawe/configconverter.git
 cd configconverter
 poetry install
 ```
@@ -137,23 +137,23 @@ Contributions are welcome! Whether it's reporting a bug, suggesting a feature, o
 
 5. **Open a Pull Request**
 
-For more detailed guidelines, refer to the [Contributing Guide](https://github.com/ankitaglawe/configconverter/blob/main/docs/contributing.md).
+For more detailed guidelines, refer to the [Contributing Guide](https://github.com/ankit-aglawe/configconverter/blob/main/docs/contributing.md).
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/ankitaglawe/configconverter/blob/main/LICENSE).
+This project is licensed under the [MIT License](https://github.com/ankit-aglawe/configconverter/blob/main/LICENSE).
 
 ## Contact
 
 - **Author:** Ankit Aglawe
 - **Email:** [aglawe.ankit@gmail.com](mailto:aglawe.ankit@gmail.com)
-- **GitHub:** [ankitaglawe](https://github.com/ankitaglawe)
+- **GitHub:** [ankit-aglawe](https://github.com/ankit-aglawe)
 - **Documentation:** [ConfigConverter Docs](https://ankit-aglawe.github.io/configconverter/)
 - **PyPI:** [configconverter](https://pypi.org/project/configconverter/)
 
 ## Useful Links
 
-- [Project Repository](https://github.com/ankitaglawe/configconverter)
+- [Project Repository](https://github.com/ankit-aglawe/configconverter)
 - [PyPI Package](https://pypi.org/project/configconverter/)
 - [Documentation](https://ankit-aglawe.github.io/configconverter/)
-- [Issue Tracker](https://github.com/ankitaglawe/configconverter/issues)
+- [Issue Tracker](https://github.com/ankit-aglawe/configconverter/issues)
