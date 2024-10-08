@@ -1,0 +1,39 @@
+# pyproject.toml
+
+[tool.poetry]
+name = "configconverter"
+version = "0.1.0"
+description = "A versatile tool to convert configuration files between different formats."
+authors = ["Ankit Aglawe <aglawe.ankit@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/ankitaglawe/configconverter"
+repository = "https://github.com/ankitaglawe/configconverter"
+documentation = "https://configconverter.readthedocs.io"
+keywords = ["configuration", "converter", "json", "yaml", "toml", "ini", "xml"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Utilities",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+PyYAML = "^6.0"
+toml = "^0.10.2"
+
+[tool.poetry.scripts]
+configconverter = "configconverter.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
