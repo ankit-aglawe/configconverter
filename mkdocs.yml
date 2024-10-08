@@ -1,0 +1,67 @@
+site_name: ConfigConverter
+site_description: Convert configuration files between different formats.
+site_author: Ankit Aglawe
+site_url: https://ankitaglawe.github.io/configconverter/
+
+repo_url: https://github.com/ankitaglawe/configconverter
+repo_name: 'ankitaglawe/configconverter'
+edit_uri: ''
+
+theme:
+  name: material
+  # custom_dir: null
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: 'images/favicon.ico'  # Replace with your favicon path
+  logo: 'images/logo.png'        # Replace with your logo path
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Usage:
+      - Overview: usage.md
+      - Command-Line Interface: cli.md
+      - Python API: api.md
+  - Examples: examples.md
+  - Contributing: contributing.md
+  - Changelog: changelog.md
+  - License: license.md
+
+plugins:
+  - search
+  - awesome-pages
+  - include-markdown
+  - git-revision-date-localized:
+      enabled: true
+      fallback_to_build_date: true
+  - mermaid2
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - footnotes
+  - tables
+  - abbr
+  - def_list
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.tilde
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ankitaglawe/configconverter
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/configconverter/
