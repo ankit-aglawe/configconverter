@@ -75,13 +75,17 @@ class TOMLEmitter(BaseEmitter):
 
 
 class INIEmitter(BaseEmitter):
-    def emit(
-        self, data: Dict[str, Dict[str, str]], indent: int = 4, **options: Any
-    ) -> str:
+    def emit(self, data: Dict[str, Any], indent: int = 4, **options: Any) -> str:
         try:
             config = configparser.ConfigParser()
             for section, params in data.items():
-                config[str(section)] = {str(k): str(v) for k, v in params.items()}
+                config[str(section)] = {}
+                if isinstance(params, dict):
+                    for k, v in params.items():
+                        config[str(section)][str(k)] = str(v)
+                else:
+                    # Handle non-dict params by converting them to strings
+                    config[str(section)]["value"] = str(params)
             output = StringIO()
             config.write(output)
             return output.getvalue()
@@ -92,7 +96,12 @@ class INIEmitter(BaseEmitter):
 class XMLEmitter(BaseEmitter):
     def emit(self, data: Dict[str, Any], indent: int = 4, **options: Any) -> str:
         try:
-            root_element = self._dict_to_xml(data)
+            if len(data) == 1:
+                root_element = self._dict_to_xml(data)
+            else:
+                # Wrap multiple root elements under a single root
+                wrapped_data = {"ConfigConverter": data}
+                root_element = self._dict_to_xml(wrapped_data)
             xml_str = tostring(root_element, encoding="unicode")
             return xml_str
         except Exception as e:
