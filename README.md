@@ -79,12 +79,6 @@ yaml_data = convert(json_data, 'json', 'yaml', from_file=False)
 print(yaml_data)
 ```
 
-## Detailed Documentation
-
-For comprehensive guides, advanced usage, and API references, visit the [ConfigConverter Documentation](https://ankit-aglawe.github.io/configconverter/).
-
-## Examples
-
 ### Batch Conversion
 
 Convert all JSON files in a directory to YAML:
