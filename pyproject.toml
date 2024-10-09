@@ -2,7 +2,7 @@
 
 [tool.poetry]
 name = "configconverter"
-version = "0.2.0"
+version = "0.3.0"
 description = "A versatile tool to convert configuration files between different formats."
 authors = ["Ankit Aglawe <aglawe.ankit@gmail.com>"]
 license = "MIT"

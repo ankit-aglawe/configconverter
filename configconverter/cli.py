@@ -7,28 +7,30 @@ License: MIT
 
 import argparse
 import logging
-import os
 import sys
 
 from .converter import convert
-from .exceptions import ConfigConverterError
-from .utils import infer_format
-
-logger = logging.getLogger("configconverter")
+from .exceptions import ConversionError, UnsupportedFormatError
 
 
-def main() -> None:
+def main():
     parser = argparse.ArgumentParser(
-        description="Convert configuration files between formats."
+        description="ConfigConverter: Convert configuration files between formats."
     )
-    parser.add_argument("input_file", help="Path to the input configuration file.")
+    parser.add_argument("input", help="Input file path or data string.")
+    parser.add_argument("output", nargs="?", help="Output file path.")
     parser.add_argument(
-        "output_file", nargs="?", help="Path to the output configuration file."
+        "--from-file",
+        action="store_true",
+        help="Interpret input as a file path.",
     )
-    parser.add_argument("-i", "--input-format", help="Format of the input file.")
-    parser.add_argument("-o", "--output-format", help="Format of the output file.")
     parser.add_argument(
-        "--indent", type=int, default=4, help="Indentation level for output."
+        "--input-format",
+        help="Specify the input format if it cannot be inferred.",
+    )
+    parser.add_argument(
+        "--output-format",
+        help="Specify the output format if it cannot be inferred.",
     )
     parser.add_argument(
         "--overwrite",
@@ -36,79 +38,55 @@ def main() -> None:
         help="Overwrite the output file if it exists.",
     )
     parser.add_argument(
-        "--stdout",
+        "--pretty",
         action="store_true",
-        help="Print output to stdout instead of a file.",
+        help="Pretty-print the output.",
     )
     parser.add_argument(
-        "--pretty", action="store_true", help="Pretty-print the output (indent=4)."
+        "--indent",
+        type=int,
+        default=4,
+        help="Indentation level for the output.",
     )
     parser.add_argument(
-        "-v", "--version", action="version", version="configconverter 0.1.0"
+        "--root-name",
+        type=str,
+        default="root",
+        help="Root element name for XML output.",
     )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version="ConfigConverter 0.2.0",
+        help="Show the version and exit.",
+    )
+
     args = parser.parse_args()
 
     # Configure logging
-    logging.basicConfig(level=logging.INFO, format="%(message)s")
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
 
-    # Infer formats if not provided
-    if not args.input_format:
-        args.input_format = infer_format(args.input_file)
-        if not args.input_format:
-            logger.error(
-                "Unable to infer input format. Please specify using --input-format."
-            )
-            sys.exit(1)
-    if not args.output_format:
-        if args.output_file:
-            args.output_format = infer_format(args.output_file)
-            if not args.output_format:
-                logger.error(
-                    "Unable to infer output format. Please specify using --output-format."
-                )
-                sys.exit(1)
-        elif args.stdout:
-            logger.error("Output format must be specified when using --stdout.")
-            sys.exit(1)
-        else:
-            logger.error("Output file or --stdout must be specified.")
-            sys.exit(1)
-
-    # Set indentation if pretty is specified
-    if args.pretty:
-        args.indent = 4
-
-    # Check if output file exists
-    if (
-        args.output_file
-        and not args.stdout
-        and os.path.exists(args.output_file)
-        and not args.overwrite
-    ):
-        response = input(f"File {args.output_file} exists. Overwrite? [y/N]: ")
-        if response.lower() != "y":
-            sys.exit("Operation cancelled.")
+    options = {
+        "indent": args.indent,
+        "pretty": args.pretty,
+    }
+    if args.root_name:
+        options["root_name"] = args.root_name
 
     try:
-        output_data = convert(
-            input_data=args.input_file,
+        convert(
+            input_data=args.input,
             input_format=args.input_format,
             output_format=args.output_format,
-            indent=args.indent,
-            from_file=True,
+            output_file=args.output,
+            from_file=args.from_file,
+            **options,
         )
-        if args.stdout:
-            print(output_data)
-        else:
-            if args.output_file:
-                with open(args.output_file, "w", encoding="utf-8") as f:
-                    f.write(output_data)
-                logger.info(
-                    "Conversion successful: %s -> %s", args.input_file, args.output_file
-                )
-            else:
-                logger.error("Output file not specified.")
-                sys.exit(1)
-    except ConfigConverterError as e:
-        logger.error("Error: %s", e)
+    except (ConversionError, UnsupportedFormatError, ValueError) as e:
+        logger.error(f"Error: {e}")
+        sys.exit(1)
+    except FileExistsError as e:
+        logger.error(f"Error: {e}")
+        sys.exit(1)
         sys.exit(1)
