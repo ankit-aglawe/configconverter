@@ -111,6 +111,86 @@ Convert a file with custom indentation:
 ```bash
 configconverter config.json config.yaml --indent 2
 ```
+### Handling Complex Data Structures
+
+When dealing with configurations that contain complex nested structures or special data types, consider the following:
+
+- **Avoid Incompatible Formats:** As INI format does not support nested structures, avoid converting complex configurations to INI.
+
+- **Custom Serialization:** If you must convert to a format with limitations, consider serializing complex data types into strings using JSON serialization.
+
+- **Example:**
+
+  ```python
+  import json
+  from configconverter import convert
+
+  # Serialize complex data to JSON strings before conversion
+  def serialize_complex_data(data):
+      if isinstance(data, (dict, list)):
+          return json.dumps(data)
+      return data
+
+  # Custom converter function
+  def custom_convert(input_file, output_file):
+      with open(input_file, 'r') as f:
+          data = json.load(f)
+
+      # Serialize complex data
+      for key, value in data.items():
+          data[key] = serialize_complex_data(value)
+
+      # Convert to INI
+      convert(data, 'json', 'ini', output_file=output_file, from_file=False)
+
+  custom_convert('complex_config.json', 'config.ini')
+
+
+## Limitations and Known Issues
+
+While ConfigConverter is designed to handle a wide range of configuration files, there are some limitations due to inherent differences between configuration formats:
+
+- **Format Incompatibilities:**
+
+  - **INI Format Limitations:**
+    - *No Nested Structures:* INI files do not support nested sections or hierarchical data.
+    - *All Values are Strings:* INI treats all values as strings, lacking native support for integers, booleans, or lists.
+    - *Loss of Hierarchy:* Nested data from formats like JSON, YAML, or TOML may be flattened when converted to INI, leading to potential loss of context.
+
+  - **XML Format Limitations:**
+    - *Complex Representation:* XML can represent nested structures but may not handle data types like booleans or integers without additional schema definitions.
+    - *Attributes vs. Elements:* Differentiating between attributes and elements can complicate the parsing and emitting processes.
+
+## Detailed Documentation
+
+For comprehensive guides, advanced usage, and API references, visit the [ConfigConverter Documentation](https://ankit-aglawe.github.io/configconverter/).
+
+- **Usage Guidelines:** Best practices for using ConfigConverter effectively.
+- **Handling Complex Data:** Strategies for dealing with nested structures and special data types.
+- **Error Handling:** Information on error messages and logging to help you troubleshoot issues.
+- **Examples:** Additional examples demonstrating various conversion scenarios and edge cases.
+
+## Examples
+
+### Batch Conversion
+
+Convert all JSON files in a directory to YAML:
+
+```python
+import os
+from configconverter import convert
+
+input_dir = 'json_configs'
+output_dir = 'yaml_configs'
+os.makedirs(output_dir, exist_ok=True)
+
+for filename in os.listdir(input_dir):
+    if filename.endswith('.json'):
+        input_file = os.path.join(input_dir, filename)
+        output_file = os.path.join(output_dir, filename.replace('.json', '.yaml'))
+        convert(input_file, 'json', 'yaml', output_file=output_file)
+```
+
 
 ## Contributing
 
@@ -157,3 +237,5 @@ This project is licensed under the [MIT License](https://github.com/ankit-aglawe
 - [PyPI Package](https://pypi.org/project/configconverter/)
 - [Documentation](https://ankit-aglawe.github.io/configconverter/)
 - [Issue Tracker](https://github.com/ankit-aglawe/configconverter/issues)
+
+

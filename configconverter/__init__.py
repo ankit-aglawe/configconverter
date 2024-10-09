@@ -5,22 +5,20 @@ Author: Ankit Aglawe <aglawe.ankit@gmail.com>
 License: MIT
 """
 
-from .converter import convert
-from .exceptions import (
-    ConfigConverterError,
+from configconverter.converter import convert
+from configconverter.exceptions import (
     ConversionError,
     EmitterError,
     ParserError,
     UnsupportedFormatError,
 )
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 __all__ = [
     "convert",
-    "ConfigConverterError",
-    "UnsupportedFormatError",
     "ConversionError",
+    "UnsupportedFormatError",
     "ParserError",
     "EmitterError",
 ]

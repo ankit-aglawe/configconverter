@@ -33,6 +33,8 @@ packages = [
 python = "^3.8"
 PyYAML = "^6.0"
 toml = "^0.10.2"
+dicttoxml = "^1.7.16"
+xmltodict = "^0.14.0"
 
 [tool.poetry.scripts]
 configconverter = "configconverter.cli:main"

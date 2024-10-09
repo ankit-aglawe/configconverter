@@ -6,21 +6,25 @@ License: MIT
 """
 
 
-class ConfigConverterError(Exception):
-    """Base exception for configconverter errors."""
+class ConversionError(Exception):
+    """Base exception for conversion errors."""
+
+    pass
 
 
-class UnsupportedFormatError(ConfigConverterError):
-    """Exception for unsupported file formats."""
+class UnsupportedFormatError(ConversionError):
+    """Exception raised when an unsupported format is specified."""
+
+    pass
 
 
-class ConversionError(ConfigConverterError):
-    """Exception for errors during conversion."""
+class EmitterError(ConversionError):
+    """Exception raised during emitting processes."""
+
+    pass
 
 
-class ParserError(ConfigConverterError):
-    """Exception for errors during parsing."""
+class ParserError(ConversionError):
+    """Exception raised during parsing processes."""
 
-
-class EmitterError(ConfigConverterError):
-    """Exception for errors during emitting."""
+    pass
