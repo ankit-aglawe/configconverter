@@ -9,7 +9,7 @@ Thank you for considering contributing to ConfigConverter!
 2. **Clone Your Fork**:
 
    ```bash
-   git clone https://github.com/yourusername/configconverter.git
+   git clone https://github.com/ankit-aglawe/configconverter.git
    ```
 
 3. **Create a Branch**:
